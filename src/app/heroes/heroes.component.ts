@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../hero';
 
+import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import {MessageService} from '../message.service';
 
 @Component({
   selector: 'app-heroes',
@@ -14,8 +15,10 @@ export class HeroesComponent implements OnInit {
 
   selectedHero : Hero;
 
-  constructor(private heroService: HeroService) { // adding an access modifier automatically assigns that parameter to a field of the same name for this instance.
-    // this.heroService = HeroService;
+  constructor(private heroService: HeroService, private messageService: MessageService) { 
+    // adding an access modifier automatically assigns that parameter to a field of the same name for this instance.
+    // this.heroService = heroService;
+    // this.messageService = messageService
   }
 
   ngOnInit(): void {
@@ -24,6 +27,7 @@ export class HeroesComponent implements OnInit {
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+    this.messageService.add(`HeroesComponent: Selected hero id = ${hero.id}`)
   }
 
   getHeroes(): void {
